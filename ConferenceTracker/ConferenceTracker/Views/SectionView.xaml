@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:ConferenceTracker.Converters"
+             x:Class="ConferenceTracker.Views.SectionView">
+    <ContentView.Resources>
+        <ResourceDictionary>
+
+            <converters:ExistElementToBoolConverter x:Key="ExistToBool"/>
+            <converters:IsNullToBoolConverter x:Key="NullToFalse"/>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <Grid HorizontalOptions="Fill"
+              VerticalOptions="Fill">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackLayout BackgroundColor="Gray" WidthRequest="3" HorizontalOptions="Start"
+                     VerticalOptions="FillAndExpand"
+                     Margin="8,0"></StackLayout>
+        <ListView ItemsSource="{Binding Speaches}"
+                  SeparatorVisibility="Default"
+                  BackgroundColor="Transparent"
+                  HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Margin="0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Label Text="{Binding SpeachStartTime}"
+                                   Grid.Column="1"/>
+                            <Frame Margin="0,5" Padding="3"
+                                   Grid.Row="1"
+                                   Grid.Column="1">
+                                <StackLayout>
+                                    <StackLayout Orientation="Horizontal"
+                                             VerticalOptions="FillAndExpand"
+                                             IsVisible="{Binding Speakers, ConverterParameter='0', Converter={StaticResource ExistToBool}}">
+                                        <Image Source="{Binding Speakers[0].FaceImageSource}"
+                                                           HeightRequest="50"/>
+                                        <StackLayout>
+                                            <Label Text="{Binding Speakers[0].Name}"/>
+                                            <Label Text="{Binding Speakers[0].Company}"/>
+                                        </StackLayout>
+                                    </StackLayout>
+
+
+                                    <Label Text="{Binding SpeachTesis}"/>
+                                </StackLayout>
+                            </Frame>
+                            <StackLayout Grid.Column="0"
+                                         Grid.Row="0" WidthRequest="8" HeightRequest="8"
+                                         BackgroundColor="Yellow"
+                                         VerticalOptions="Center"
+                                         HorizontalOptions="Center"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
+    </Grid>
+</ContentView>

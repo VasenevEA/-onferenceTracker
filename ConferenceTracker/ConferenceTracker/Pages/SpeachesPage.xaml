@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
+             x:Class="ConferenceTracker.Pages.SpeachesPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Hello World" TextColor="Blue"/>
+            <controls:CarouselViewControl  x:Name="myCarousel" 
+                                       Orientation="Horizontal" 
+                                       InterPageSpacing="0" 
+                                       ShowIndicators="True"
+                                       VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            </controls:CarouselViewControl>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
