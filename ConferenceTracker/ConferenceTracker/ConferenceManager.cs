@@ -76,7 +76,7 @@ namespace ConferenceTracker
         }
 
 
-        private static List<Section> RemoveDuplicates(List<Section> sections)
+        public static List<Section> RemoveDuplicates(List<Section> sections)
         {
             List<Section> tempList = new List<Section>();
 
@@ -85,6 +85,20 @@ namespace ConferenceTracker
                 if (!tempList.Exists(x => x.Name == section.Name))
                 {
                     tempList.Add(section);
+                }
+            }
+            return tempList;
+        }
+
+        public static IEnumerable<DateTime> RemoveDuplicates(IEnumerable<DateTime> times)
+        {
+            List<DateTime> tempList = new List<DateTime>();
+
+            foreach (var time in times)
+            {
+                if (!tempList.Exists(x => x == time))
+                {
+                    tempList.Add(time);
                 }
             }
             return tempList;

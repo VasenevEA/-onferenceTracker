@@ -16,10 +16,29 @@ namespace ConferenceTracker.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SectionView : ContentView
     {
-        public SectionView(SectionItem section)
+
+        Action<DateTime> setSelectedTime;
+        SectionItem section;
+        public SectionView(SectionItem section, Action<DateTime> setSelectedTime)
         {
+            this.section = section;
+            this.setSelectedTime = setSelectedTime;
             InitializeComponent();
             BindingContext = IocContainter.Container.Resolve<SectionViewModel>(new TypedParameter(typeof(SectionItem), section));
+            listView.VerticalScrollBarVisibility = ScrollBarVisibility.Never;
+            listView.ItemAppearing += ListView_ItemAppearing;
+        }
+
+        private void ListView_ItemAppearing(object sender, ItemVisibilityEventArgs e)
+        {
+            var speach = e.Item as Speach;
+            System.Diagnostics.Debug.WriteLine($"{listView.FirstVisibleItemIndex}");
+            if (listView.FirstVisibleItem is Speach sp)
+            {
+                setSelectedTime(sp.SpeachStartTime);
+
+                System.Diagnostics.Debug.WriteLine($"{sp.SpeachStartTime}");
+            }
         }
 
         public SectionView()
@@ -48,6 +67,13 @@ namespace ConferenceTracker.Views
                     }
                 }
             };
+        }
+
+        public void ScrollTo(DateTime dt)
+        {
+            var speach = section.Speachs.FirstOrDefault(x => x.SpeachStartTime == dt);
+            if (speach != null)
+                listView.ScrollTo(speach, ScrollToPosition.Start, false);
         }
     }
 }

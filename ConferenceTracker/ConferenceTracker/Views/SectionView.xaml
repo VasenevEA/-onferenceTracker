@@ -2,6 +2,7 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:converters="clr-namespace:ConferenceTracker.Converters"
+             xmlns:local="clr-namespace:ConferenceTracker"
              x:Class="ConferenceTracker.Views.SectionView">
     <ContentView.Resources>
         <ResourceDictionary>
@@ -18,14 +19,15 @@
         <StackLayout BackgroundColor="Gray" WidthRequest="3" HorizontalOptions="Start"
                      VerticalOptions="FillAndExpand"
                      Margin="8,0"></StackLayout>
-        <ListView ItemsSource="{Binding Speaches}"
+        <local:ExtendedListView ItemsSource="{Binding Speaches}"
+                  x:Name="listView"
                   SeparatorVisibility="Default"
                   BackgroundColor="Transparent"
                   HasUnevenRows="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Grid Margin="0,5">
+                        <Grid Margin="0,5" HeightRequest="100">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="20"/>
                                 <ColumnDefinition Width="*"/>
@@ -65,6 +67,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
 
-        </ListView>
+        </local:ExtendedListView>
     </Grid>
 </ContentView>

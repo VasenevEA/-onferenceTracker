@@ -5,7 +5,7 @@
              x:Class="ConferenceTracker.Pages.SpeachesPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Hello World" TextColor="Blue"/>
+            <Label Text="{Binding StartDateTime}" TextColor="Blue"/>
             <controls:CarouselViewControl  x:Name="myCarousel" 
                                        Orientation="Horizontal" 
                                        InterPageSpacing="0" 
